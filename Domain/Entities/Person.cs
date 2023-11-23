@@ -20,6 +20,7 @@ public partial class Person: BaseEntity
     public virtual ICollection<Client> Clients { get; set; } = new List<Client>();
 
     public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
+    public virtual ICollection<Employee> manager { get; set; } = new List<Employee>();
 
     public virtual Persontype PersonType { get; set; } = null!;
 }

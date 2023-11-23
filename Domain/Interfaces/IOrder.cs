@@ -7,5 +7,6 @@ namespace Domain.Interfaces;
 public interface IOrder: IGenericRepo<Order>
 {
 
+        Task<IEnumerable<object>> GetDelayedOrders();
 
 }

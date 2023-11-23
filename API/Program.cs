@@ -1,3 +1,5 @@
+using System.Reflection;
+using API.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data;
 
@@ -9,6 +11,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAplicationServices();
+builder.Services.ConfigureRateLimiting();
+builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
 
 builder.Services.AddDbContext<gardeningContext>(options =>
 {
@@ -25,6 +30,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("CorsPolicy");
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -34,5 +41,5 @@ app.MapControllers();
 app.Run();
 
 // dotnet ef dbcontext scaffold "server=localhost;user=root;password=123456;database=gardeningFiltro" Pomelo.EntityFrameworkCore.MySql -s .\API\ -p .\Domain\ --context gardeningContext --context-dir Data --output-dir Entities   
-// dotnet ef migrations add UpdateDatabase -p Persistence -s API -o Data\Migrations
+// dotnet ef migrations add UpdateDatabase2 -p Persistence -s API -o Data\Migrations
 // dotnet ef database update -s .\API\ -p .\Persistence\

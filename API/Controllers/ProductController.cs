@@ -24,6 +24,14 @@ namespace API.Controllers
             var product = await _unitOfWork.Products.GetAllAsync();
             return _mapper.Map<List<ProductDto>>(product);
         }
+        [HttpGet("more3000Euros")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<ProductDto>>> more3000Euros()
+        {
+            var product = await _unitOfWork.Products.more3000Euros();
+            return Ok(product);
+        }
         
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

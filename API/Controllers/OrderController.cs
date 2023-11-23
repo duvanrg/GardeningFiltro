@@ -25,6 +25,15 @@ namespace API.Controllers
             return _mapper.Map<List<OrderDto>>(order);
         }
         
+        [HttpGet("GetDelayedOrders")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<OrderDto>>> GetDelayedOrders()
+        {
+            var order = await _unitOfWork.Orderse.GetDelayedOrders();
+            return Ok(order);
+        }
+        
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

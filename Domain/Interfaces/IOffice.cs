@@ -6,5 +6,5 @@ namespace Domain.Interfaces;
 
 public interface IOffice : IGenericRepoS<Office>
 {
-
+        Task<IEnumerable<Office>> GetOfficeNoSellFruits();
 }

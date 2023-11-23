@@ -17,6 +17,7 @@ namespace Persistencia.Data.Configuration
             builder.HasIndex(e => e.OfficeId, "IX_Employees_OfficeCode");
 
             builder.HasIndex(e => e.PersonId, "IX_Employees_PersonId");
+            builder.HasIndex(e => e.ManagerId, "IX_Employees_ManagerId");
 
             builder.Property(e => e.Extention).HasMaxLength(50);
 
@@ -27,6 +28,10 @@ namespace Persistencia.Data.Configuration
             builder.HasOne(d => d.Person).WithMany(p => p.Employees)
                 .HasForeignKey(d => d.PersonId)
                 .HasConstraintName("FK_Employees_persons_PersonId");
+
+            builder.HasOne(d => d.Manager).WithMany(p => p.manager)
+                .HasForeignKey(d => d.ManagerId)
+                .HasConstraintName("IX_Employees_ManagerId");
         }
     }
 }

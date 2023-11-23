@@ -24,6 +24,14 @@ namespace API.Controllers
             var office = await _unitOfWork.Offices.GetAllAsync();
             return _mapper.Map<List<OfficeDto>>(office);
         }
+        [HttpGet("GetOfficeNoSellFruits")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<IEnumerable<OfficeDto>>> GetOfficeNoSellFruits()
+        {
+            var office = await _unitOfWork.Offices.GetOfficeNoSellFruits();
+            return Ok(office);
+        }
         
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

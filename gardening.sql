@@ -266,7 +266,6 @@ INSERT INTO `offices` (`Id`, `PostalCodeId`, `Phone`, `AddressLine1`, `AddressLi
 ('TAL-ES', 33, '+34 925 867231', 'Francisco Aguirre, 32', '5º piso (exterior)'),
 ('TOK-JP', 34, '+81 33 224 5000', '4-1 Kioicho', '');
 
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `orderdetails`
@@ -1289,32 +1288,6 @@ INSERT INTO `products` (`Id`, `Name`, `ProductLine`, `Dimensions`, `IdSupplier`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `refreshtoken`
---
-
-CREATE TABLE `refreshtoken` (
-  `Id` int(11) NOT NULL,
-  `UserId` int(11) NOT NULL,
-  `Token` varchar(50) DEFAULT NULL,
-  `Expires` datetime(6) NOT NULL,
-  `Created` datetime(6) NOT NULL,
-  `Revoked` datetime(6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `rol`
---
-
-CREATE TABLE `rol` (
-  `Id` int(11) NOT NULL,
-  `rolName` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `states`
 --
 
@@ -1397,123 +1370,6 @@ INSERT INTO `suppliers` (`Id`, `Name`, `Phone`, `Fax`) VALUES
 (8, 'Valencia Garden Service', '+51441491241', 'Fax5908172347');
 
 -- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `user`
---
-
-CREATE TABLE `user` (
-  `Id` int(11) NOT NULL,
-  `username` varchar(50) DEFAULT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `user`
---
-
-INSERT INTO `user` (`Id`, `username`, `email`, `password`) VALUES
-(1, 'marcos13', 'marcos@gardening.es', 'Pas1'),
-(2, 'ruben15', 'rlopez@gardening.es', 'Pas1'),
-(3, 'alberto21', 'asoria@gardening.es', 'Pas1'),
-(4, 'maria451', 'msolis@gardening.es', 'Pas1'),
-(5, 'felipe541', 'frosas@gardening.es', 'Pas1'),
-(6, 'cortiz845', 'cortiz@gardening.es', 'Pas1'),
-(7, 'csoria54', 'csoria@gardening.es', 'Pas1'),
-(8, 'mlopez654', 'mlopez@gardening.es', 'Pas1'),
-(9, 'lcampoamor494', 'lcampoamor@gardening.es', 'Pas1'),
-(10, 'hrodriguez651', 'hrodriguez@gardening.es', 'Pas1'),
-(11, 'manu54', 'manu@gardening.es', 'Pas1'),
-(12, 'jmmart75', 'jmmart@hotmail.es', 'Pas1'),
-(13, 'dpalma64', 'dpalma@gardening.es', 'Pas1'),
-(14, 'opalma15', 'opalma@gardening.es', 'Pas1'),
-(15, 'ffignon78', 'ffignon@gardening.com', 'Pas1'),
-(16, 'lnarvaez6512', 'lnarvaez@gardening.com', 'Pas1'),
-(17, 'lserra21', 'lserra@gardening.com', 'Pas1'),
-(18, 'mbolton30', 'mbolton@gardening.com', 'Pas1'),
-(19, 'wssanchez5', 'wssanchez@gardening.com', 'Pas1'),
-(20, 'hwashington156', 'hwashington@gardening.com', 'Pas1'),
-(21, 'mpaxton51', 'mpaxton@gardening.com', 'Pas1'),
-(22, 'lpaxton156', 'lpaxton@gardening.com', 'Pas1'),
-(23, 'nnishikori', 'nnishikori@gardening.com', 'Pas1'),
-(24, 'nriko14', 'nriko@gardening.com', 'Pas1'),
-(25, 'tnomura156', 'tnomura@gardening.com', 'Pas1'),
-(26, 'ajohnson4145', 'ajohnson@gardening.com', 'Pas1'),
-(27, 'lwestfalls561', 'lwestfalls@gardening.com', 'Pas1'),
-(28, 'jwalton44', 'jwalton@gardening.com', 'Pas1'),
-(29, 'kfalmer61', 'kfalmer@gardening.com', 'Pas1'),
-(30, 'jbellinelli561', 'jbellinelli@gardening.com', 'Pas1'),
-(31, 'mkishi615', 'mkishi@gardening.com', 'Pas1'),
-(32, 'daniel.g651', 'daniel.g@gardening.com', 'Pas1'),
-(33, 'anne45', 'anne.w@gardening.com', 'Pas1'),
-(34, 'link416', 'link.f@gardening.com', 'Pas1'),
-(35, 'akane165', 'akane.t@gardening.com', 'Pas1'),
-(36, 'antoni15', 'antonio.l@gardening.com', 'Pas1'),
-(37, 'jose5487', 'jose.b@gardening.com', 'Pas1'),
-(38, 'paco454', 'paco.l@gardening.com', 'Pas1'),
-(39, 'guillermo416', 'guillermo.r@gardening.com', 'Pas1'),
-(40, 'david156', 'david.s@gardening.com', 'Pas1'),
-(41, 'jos4514', 'jose.t@gardening.com', 'Pas1'),
-(42, 'antonio456', 'antonio.l@gardening.com', 'Pas1'),
-(43, 'pedro5156', 'pedro.c@gardening.com', 'Pas1'),
-(44, 'juan562', 'juan.r@gardening.com', 'Pas1'),
-(45, 'javier45145', 'javier.v@gardening.com', 'Pas1'),
-(46, 'maria562', 'maria.r@gardening.com', 'Pas1'),
-(47, 'beatriz516', 'beatriz.f@gardening.com', 'Pas1'),
-(48, 'victoria5616', 'victoria.c@gardening.com', 'Pas1'),
-(49, 'luis156', 'luis.m@gardening.com', 'Pas1'),
-(50, 'mario45156', 'mario.s@gardening.com', 'Pas1'),
-(51, 'cristian562', 'cristian.r@gardening.com', 'Pas1'),
-(52, 'francisco5616', 'francisco.c@gardening.com', 'Pas1'),
-(53, 'maria45156', 'maria.s@gardening.com', 'Pas1'),
-(54, 'federico6512', 'federico.g@gardening.com', 'Pas1'),
-(55, 'tony156', 'tony.m@gardening.com', 'Pas1'),
-(56, 'eva45156', 'eva.s@gardening.com', 'Pas1'),
-(57, 'matias45156', 'matias.s@gardening.com', 'Pas1'),
-(58, 'benito155', 'benito.l@gardening.com', 'Pas1'),
-(59, 'joseluis45156', 'joseluis.s@gardening.com', 'Pas1'),
-(60, 'sara156', 'sara.m@gardening.com', 'Pas1'),
-(61, 'luis54', 'luis.j@gardening.com', 'Pas1'),
-(62, 'francois5145', 'francois.t@gardening.com', 'Pas1'),
-(63, 'pierre541', 'pierre.d@gardening.com', 'Pas1'),
-(64, 'jacob54', 'jacob.j@gardening.com', 'Pas1'),
-(65, 'antonio562', 'antonio.r@gardening.com', 'Pas1'),
-(66, 'richard156', 'richard.m@gardening.com', 'Pas1'),
-(67, 'justin45156', 'justin.s@gardening.com', 'Pas1');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `userrol`
---
-
-CREATE TABLE `userrol` (
-  `UsuarioId` int(11) NOT NULL,
-  `RolId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `__efmigrationshistory`
---
-
-CREATE TABLE `__efmigrationshistory` (
-  `MigrationId` varchar(150) NOT NULL,
-  `ProductVersion` varchar(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `__efmigrationshistory`
---
-
-INSERT INTO `__efmigrationshistory` (`MigrationId`, `ProductVersion`) VALUES
-('20231120164531_UpdateDatabase', '7.0.10');
-
---
--- Índices para tablas volcadas
---
 
 --
 -- Indices de la tabla `cities`
@@ -1617,18 +1473,6 @@ ALTER TABLE `products`
   ADD KEY `IX_products_ProductLine` (`ProductLine`);
 
 --
--- Indices de la tabla `refreshtoken`
---
-ALTER TABLE `refreshtoken`
-  ADD PRIMARY KEY (`Id`),
-  ADD KEY `IX_RefreshToken_UserId` (`UserId`);
-
---
--- Indices de la tabla `rol`
---
-ALTER TABLE `rol`
-  ADD PRIMARY KEY (`Id`);
-
 --
 -- Indices de la tabla `states`
 --
@@ -1648,24 +1492,6 @@ ALTER TABLE `status`
 ALTER TABLE `suppliers`
   ADD PRIMARY KEY (`Id`);
 
---
--- Indices de la tabla `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`Id`);
-
---
--- Indices de la tabla `userrol`
---
-ALTER TABLE `userrol`
-  ADD PRIMARY KEY (`UsuarioId`,`RolId`),
-  ADD KEY `IX_userRol_RolId` (`RolId`);
-
---
--- Indices de la tabla `__efmigrationshistory`
---
-ALTER TABLE `__efmigrationshistory`
-  ADD PRIMARY KEY (`MigrationId`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -1774,12 +1600,6 @@ ALTER TABLE `suppliers`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT de la tabla `user`
---
-ALTER TABLE `user`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
-
---
 -- Restricciones para tablas volcadas
 --
 
@@ -1851,21 +1671,8 @@ ALTER TABLE `products`
   ADD CONSTRAINT `FK_products_suppliers_IdSupplier` FOREIGN KEY (`IdSupplier`) REFERENCES `suppliers` (`Id`);
 
 --
--- Filtros para la tabla `refreshtoken`
---
-ALTER TABLE `refreshtoken`
-  ADD CONSTRAINT `FK_refreshtoken_user_UserId` FOREIGN KEY (`UserId`) REFERENCES `user` (`Id`) ON DELETE CASCADE;
-
---
 -- Filtros para la tabla `states`
 --
 ALTER TABLE `states`
   ADD CONSTRAINT `FK_states_countries_CountryId` FOREIGN KEY (`CountryId`) REFERENCES `countries` (`Id`) ON DELETE CASCADE;
 
---
--- Filtros para la tabla `userrol`
---
-ALTER TABLE `userrol`
-  ADD CONSTRAINT `FK_userRol_rol_RolId` FOREIGN KEY (`RolId`) REFERENCES `rol` (`Id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_userRol_user_UsuarioId` FOREIGN KEY (`UsuarioId`) REFERENCES `user` (`Id`) ON DELETE CASCADE;
-COMMIT;

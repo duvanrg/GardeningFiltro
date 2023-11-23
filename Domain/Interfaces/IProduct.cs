@@ -6,5 +6,6 @@ namespace Domain.Interfaces;
 
 public interface IProduct : IGenericRepoS<Product>
 {
+    Task<IEnumerable<object>> more3000Euros();
 
 }

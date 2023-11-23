@@ -13,11 +13,12 @@ public partial class Employee: BaseEntity
 
     public string OfficeId { get; set; }
 
-    public int Manager { get; set; }
+    public int ManagerId { get; set; }
 
     public virtual ICollection<Client> Clients { get; set; } = new List<Client>();
 
     public virtual Office Office { get; set; }
 
     public virtual Person Person { get; set; } = null!;
+    public virtual Person Manager { get; set; } = null!;
 }

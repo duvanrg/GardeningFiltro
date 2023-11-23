@@ -122,7 +122,7 @@ namespace Persistence.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
-                    b.Property<int>("Manager")
+                    b.Property<int>("ManagerId")
                         .HasColumnType("int");
 
                     b.Property<string>("OfficeId")
@@ -133,6 +133,8 @@ namespace Persistence.Data.Migrations
 
                     b.HasKey("Id")
                         .HasName("PRIMARY");
+
+                    b.HasIndex(new[] { "ManagerId" }, "IX_Employees_ManagerId");
 
                     b.HasIndex(new[] { "OfficeId" }, "IX_Employees_OfficeCode");
 
@@ -442,60 +444,6 @@ namespace Persistence.Data.Migrations
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb4_general_ci");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Refreshtoken", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Created")
-                        .HasMaxLength(6)
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("Expires")
-                        .HasMaxLength(6)
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("Revoked")
-                        .HasMaxLength(6)
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("Token")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id")
-                        .HasName("PRIMARY");
-
-                    b.HasIndex(new[] { "UserId" }, "IX_RefreshToken_UserId");
-
-                    b.ToTable("refreshtoken", (string)null);
-
-                    MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb4_general_ci");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Rol", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("RolName")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("rolName");
-
-                    b.HasKey("Id")
-                        .HasName("PRIMARY");
-
-                    b.ToTable("rol", (string)null);
-
-                    MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb4_general_ci");
-                });
-
             modelBuilder.Entity("Domain.Entities.State", b =>
                 {
                     b.Property<int>("Id")
@@ -563,54 +511,6 @@ namespace Persistence.Data.Migrations
                     MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb4_general_ci");
                 });
 
-            modelBuilder.Entity("Domain.Entities.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)")
-                        .HasColumnName("email");
-
-                    b.Property<string>("Password")
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)")
-                        .HasColumnName("password");
-
-                    b.Property<string>("Username")
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
-                        .HasColumnName("username");
-
-                    b.HasKey("Id")
-                        .HasName("PRIMARY");
-
-                    b.ToTable("user", (string)null);
-
-                    MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb4_general_ci");
-                });
-
-            modelBuilder.Entity("Userrol", b =>
-                {
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RolId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UsuarioId", "RolId")
-                        .HasName("PRIMARY")
-                        .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-
-                    b.HasIndex(new[] { "RolId" }, "IX_userRol_RolId");
-
-                    b.ToTable("userrol", (string)null);
-
-                    MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb4_general_ci");
-                });
-
             modelBuilder.Entity("Domain.Entities.City", b =>
                 {
                     b.HasOne("Domain.Entities.State", "State")
@@ -653,6 +553,13 @@ namespace Persistence.Data.Migrations
 
             modelBuilder.Entity("Domain.Entities.Employee", b =>
                 {
+                    b.HasOne("Domain.Entities.Person", "Manager")
+                        .WithMany("manager")
+                        .HasForeignKey("ManagerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("IX_Employees_ManagerId");
+
                     b.HasOne("Domain.Entities.Office", "Office")
                         .WithMany("Employees")
                         .HasForeignKey("OfficeId")
@@ -664,6 +571,8 @@ namespace Persistence.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Employees_persons_PersonId");
+
+                    b.Navigation("Manager");
 
                     b.Navigation("Office");
 
@@ -772,17 +681,6 @@ namespace Persistence.Data.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Refreshtoken", b =>
-                {
-                    b.HasOne("Domain.Entities.User", "User")
-                        .WithMany("Refreshtokens")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Domain.Entities.State", b =>
                 {
                     b.HasOne("Domain.Entities.Country", "Country")
@@ -792,23 +690,6 @@ namespace Persistence.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("Userrol", b =>
-                {
-                    b.HasOne("Domain.Entities.Rol", null)
-                        .WithMany()
-                        .HasForeignKey("RolId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_userRol_rol_RolId");
-
-                    b.HasOne("Domain.Entities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_userRol_user_UsuarioId");
                 });
 
             modelBuilder.Entity("Domain.Entities.City", b =>
@@ -853,6 +734,8 @@ namespace Persistence.Data.Migrations
                     b.Navigation("Clients");
 
                     b.Navigation("Employees");
+
+                    b.Navigation("manager");
                 });
 
             modelBuilder.Entity("Domain.Entities.Persontype", b =>
@@ -890,11 +773,6 @@ namespace Persistence.Data.Migrations
             modelBuilder.Entity("Domain.Entities.Supplier", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Domain.Entities.User", b =>
-                {
-                    b.Navigation("Refreshtokens");
                 });
 #pragma warning restore 612, 618
         }
