@@ -186,7 +186,7 @@ INSERT INTO offices (Id, PostalCodeId, Phone, AddressLine1, AddressLine2) VALUES
 ('TAL-ES',33,'+34 925 867231','Francisco Aguirre, 32','5º piso (exterior)'),
 ('TOK-JP',34,'+81 33 224 5000','4-1 Kioicho','');
 
-INSERT INTO employees (PersonId, Extention, OfficeId, Manager) VALUES 
+INSERT INTO employees (PersonId, Extention, OfficeId, ManagerId) VALUES 
 (1,'3897','TAL-ES',NULL),
 (2,'2899','TAL-ES',1),
 (3,'2837','TAL-ES',2),

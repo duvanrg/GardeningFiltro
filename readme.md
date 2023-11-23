@@ -15,3 +15,15 @@ Para iniciar GardensGestión en tu entorno local, sigue estos pasos:
 ## Endpoint de la consulta
 
 `http://localhost:5092/[Route]`
+
+## consultas
+### Devuelve un listado con el código de pedido, código de cliente, fecha esperada y fecha de entrega de los pedidos que no han sido entregados a tiempo.
+
+`http://localhost:5092/Client/ClientNoPayment`
+
+## Devuelve las oficinas donde no trabajan ninguno de los empleados que hayan sido los representantes de ventas de algún cliente que haya realizado la compra de algún producto de la gama Frutales.
+
+`http://localhost:5092/Office/GetOfficeNoSellFruits`
+
+## Devuelve las oficinas donde no trabajan ninguno de los empleados que hayan sido los representantes de ventas de algún cliente que haya realizado la compra de algún producto de la gama Frutales.
+ `http://localhost:5092/Order/GetDelayedOrders`
